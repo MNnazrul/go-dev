@@ -16,14 +16,43 @@ func recursiveFunction(x int) int {
     return recursiveFunction(x + 1)
 }
 
-func main() {
-    // var a complex128 = complex(5, 2)
-    
-    // fmt.Println(a)
-    // _pile , name := myFunction(2, "hello")
-    // fmt.Println( name, _pile)
+func sayHello(name string) {
+    fmt.Println("Welcome to the golang course. ")
+}
 
-    //---------------
-    recursiveFunction(0)
+func application() {
+    var name string
+    fmt.Println("Enter your name - ")
+    fmt.Scanln(&name)
+    
+    fmt.Println("---------" + name)
+    
+    var num1 int
+    var num2 int
+    
+    fmt.Println("Enter first number - ")
+    fmt.Scanln(&num1)
+    fmt.Println("Enter second number - ")
+    fmt.Scanln(&num2)
+    
+    sum := num1 + num2
+    
+    fmt.Println("Hello, ", name)
+    fmt.Println("Summation = ", sum)
+    
+    fmt.Println("Thank you for using the application")
+}
+
+func main() {
+    
+    slice1 := []int{}
+
+    slice1 = append(slice1, 1)
+    fmt.Println(cap(slice1))
+    slice1 = append(slice1, 1)
+    fmt.Println(cap(slice1))
+    slice1 = append(slice1, 1)
+    fmt.Println(cap(slice1))
+
 
 }
