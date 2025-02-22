@@ -16,10 +16,6 @@ func recursiveFunction(x int) int {
     return recursiveFunction(x + 1)
 }
 
-func sayHello(name string) {
-    fmt.Println("Welcome to the golang course. ")
-}
-
 func application() {
     var name string
     fmt.Println("Enter your name - ")
