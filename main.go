@@ -101,7 +101,15 @@ func class_tutorial() {
 
 func main() {
     
-    class_tutorial()
+    // class_tutorial()
+
+    n := 12
+    n = 39
+
+    // n := "string"
+
+    fmt.Println(n)
+
 
 
 }
