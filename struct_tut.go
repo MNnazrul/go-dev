@@ -2,12 +2,19 @@ package main
 
 import "fmt"
 
-type Person struct {
+type User struct {
 	Name string
 	Age int
 }
 
 func main() {
-	p := Person("Name", 25)	
-	fmt.Println(p)
+	var user1 User
+
+	user1 = User {
+		Name : "Nazrul",
+		Age : 25,
+	}
+
+	fmt.Println(user1)
+
 }
