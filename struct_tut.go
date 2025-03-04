@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+var (
+	b int = 10
+	name string = "name"
+)
+
 type User struct {
 	Name string
 	Age int
