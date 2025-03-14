@@ -41,6 +41,11 @@ func (d Dog) GiveAffection(to Human) {
     fmt.Printf("The dog named %s has given affection to Human named %s\n", d.Name, to.Firstname)
 }
 
+func Pet(animal DomesticAnimal, human Human) {
+	animal.GivenAffection(human)
+	animal.ReceiveAffection(human)
+}
+
 func main() {
 	var r io.Reader
 	fmt.Println(r)
