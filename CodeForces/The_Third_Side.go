@@ -1,12 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func solve() {
 	var n int
-	ar := make([]int, n)
-	
+	fmt.Scan(&n)
+	ans := -n + 1
+	for n > 0 {
+		n--
+		var val int
+		fmt.Scan(&val)
+		ans += val
+	}
 
+	fmt.Println(ans)
 }
 
 func main() {
