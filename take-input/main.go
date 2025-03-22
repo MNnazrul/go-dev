@@ -14,18 +14,29 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+	defer file.Close()
 
 	reader := bufio.NewReader(file)
 
-	data := make([]byte, 100)
+	for {
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	_, err = reader.Read(data)
-
-	if err != nil {
-		fmt.Println(err)
-		return
+		fmt.Println(line)
 	}
 
-	fmt.Println(string(data))
+	// data := make([]byte, 100)
+
+	// _, err = reader.Read(data)
+
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+
+	// fmt.Println(string(data))
 
 }
