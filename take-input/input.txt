@@ -1,3 +1,5 @@
-1
+2
 stringstring 2
 20 30
+namestring 3
+12 23 34
