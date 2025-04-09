@@ -1,0 +1,10 @@
+1. Parameter vs argument
+2. First order Function (works with object, property and relation)
+  i. standard function or named function
+  ii. anonymous function
+  iii. IIFE
+  iv. function expression
+
+3. Higher order function (workds with object, property, relation and function)
+4. Callback function  (function that is passed as parameter of HOF)
+5. First class citizer => (variable assign data)
