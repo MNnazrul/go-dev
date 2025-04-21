@@ -95,17 +95,16 @@ func solve() {
 		Fscan(in, &br[j])
 	}
 	initiate(n)
-	ans := min(chk(ar, hr, 1, 0), chk(ar, hr, 1, 1))
+	ans1 := min(chk(ar, hr, 1, 0), chk(ar, hr, 1, 1) + int64(ar[0]))
 	initiate(n)
 	transpose(hr)
-	ans = min(ans, chk(br, hr, 1, 0), chk(br, hr, 1, 1))
+	ans2 := min(chk(br, hr, 1, 0), chk(br, hr, 1, 1) + int64(br[0]))
 
-	if ans == INF {
+	if ans1 >= INF || ans2 >= INF {
 		Fprintln(out, -1)
 		return
 	}
-
-	Fprintln(out, ans)
+	Fprintln(out, ans1 + ans2)
 }
 
 func main() {
