@@ -21,7 +21,9 @@ func solve() {
 
 	for Fscan(in, &q); q > 0; q-- {
 		Fscan(in, &id)
-		if id == 1 {
+
+		switch id {
+		case 1:
 			if flg {
 				val = lst.Back().Value.(int)
 				lst.Remove(lst.Back())
@@ -32,10 +34,10 @@ func solve() {
 				lst.PushBack(val)
 			}
 			ans1, ans2 = ans1 - int64(n * val) + sm, ans2 - sm + int64(n * val)
-		} else if id == 2 {
+		case 2:
 			ans1, ans2 = ans2, ans1
 			flg = !flg
-		} else {
+		case 3:
 			Fscan(in, &val)
 			n++
 			ans1 += int64(n * val)
@@ -47,6 +49,7 @@ func solve() {
 				lst.PushFront(val)
 			}
 		}
+
 		Fprintln(out, ans1)
 	}
 }
