@@ -27,7 +27,9 @@ func (h *Hash) init(st string) {
 	h.ar = make([]int64, n + 2)
 	h.ar[0].val1 = 0
 	h.ar[0].val2 = 0
-
+	for i := 1; i <= n; i++ {
+		id := int64()
+	}
 }
 
 func main() {
