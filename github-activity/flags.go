@@ -5,10 +5,10 @@ import (
 )
 
 type CLIOptions struct {
-	Filter string
-	Limit int 
-	Refresh bool 
-	Raw bool 
+	Filter  string
+	Limit   int
+	Refresh bool
+	Raw     bool
 }
 
 func ParseFlags() (*CLIOptions, []string) {
@@ -21,6 +21,6 @@ func ParseFlags() (*CLIOptions, []string) {
 	flag.BoolVar(&opts.Refresh, "refresh", false, "Skip cache and force API request")
 	flag.BoolVar(&opts.Raw, "raw", false, "Show raw JSON output")
 
-	flag.Parse() 
+	flag.Parse()
 	return opts, flag.Args()
 }
