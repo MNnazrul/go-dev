@@ -142,19 +142,13 @@ github-activity/
 ├── types.go                 # Structs for event types
 ├── go.mod / go.sum          # Go module files
 ├── README.md                # Usage & documentation
-├── /test/                   # Unit tests
 ```
 
 ---
 
 ### 8. 🧪 **Testing Requirements**
 
-- Unit tests for:
-
-  - Fetching from the API
-  - Parsing and formatting various event types
-  - Handling edge cases (empty events, unknown event type)
-  - CLI argument parsing logic
+> **Unit tests are not required at this stage. You may add them later if desired.**
 
 ---
 

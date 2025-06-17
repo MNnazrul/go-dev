@@ -19,7 +19,14 @@ func FetchUserEvents(username string) ([]GitHubEvent, error) {
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	switch resp.StatusCode {
+	case http.StatusOK:
+		// continue
+	case http.StatusNotFound:
+		return nil, fmt.Errorf("user '%s' not found(404)", username)
+	case http.StatusForbidden:
+		return nil, fmt.Errorf("API rate limit exceeded or access forbidden (403)")
+	default:
 		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf("GitHub API error: %s\n%s", resp.Status, string(body))
 	}

@@ -16,13 +16,12 @@ func main() {
 	fmt.Printf("Fetching GitHub activity for user: %s\n", username)
 	fmt.Printf("options : %+v\n", opts)
 
-	events, err := FetchUserEvents(username)
-	if err != nil {
-		fmt.Printf("Error: %v\n", err)
-		os.Exit(1)
-	}
+	events := getEventsWithCache(username, opts)
 
-	fmt.Printf("Fetched %d events.\n", len(events))
+	if len(events) == 0 {
+		fmt.Println("No public events found for this user.")
+		return
+	}
 
 	if opts.Raw {
 		for _, event := range events {
@@ -37,17 +36,49 @@ func main() {
 			}
 		}
 
-		count := opts.Limit
+		shown := 0
 		for _, event := range events {
-			if count == 0 {
+			if shown >= opts.Limit {
 				break
 			}
 			if len(filterSet) > 0 && !filterSet[event.Type] {
 				continue
 			}
-			count--
-			fmt.Println(FormatEvent(event))
+			formatted := FormatEvent(event)
+			if opts.Verbose || !isUnsupportedEvent(formatted) {
+				fmt.Println(formatted)
+				shown++
+			}
 		}
-
+		if shown == 0 {
+			fmt.Println("No events match.")
+		}
 	}
+}
+
+func getEventsWithCache(username string, opts *CLIOptions) []GitHubEvent {
+	cache, err := LoadCache()
+	if err != nil {
+		fmt.Printf("Warning: could not load cache: %v\n", err)
+		cache = Cache{}
+	}
+
+	if !opts.Refresh {
+		if cached, ok := GetCachedEvents(cache, username); ok {
+			fmt.Println("(Loaded from cache)")
+			return cached
+		}
+	}
+
+	events, err := FetchUserEvents(username)
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+		os.Exit(1)
+	}
+
+	SetCachedEvents(cache, username, events)
+	if err := SaveCache(cache); err != nil {
+		fmt.Printf("Warning: could not save cache: %v\n", err)
+	}
+	return events
 }

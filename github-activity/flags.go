@@ -9,6 +9,7 @@ type CLIOptions struct {
 	Limit   int
 	Refresh bool
 	Raw     bool
+	Verbose bool
 }
 
 func ParseFlags() (*CLIOptions, []string) {
@@ -20,6 +21,7 @@ func ParseFlags() (*CLIOptions, []string) {
 	flag.IntVar(&opts.Limit, "l", 10, "Number of events to display (shorthand)")
 	flag.BoolVar(&opts.Refresh, "refresh", false, "Skip cache and force API request")
 	flag.BoolVar(&opts.Raw, "raw", false, "Show raw JSON output")
+	flag.BoolVar(&opts.Verbose, "verbose", false, "Show unsupported event types")
 
 	flag.Parse()
 	return opts, flag.Args()
