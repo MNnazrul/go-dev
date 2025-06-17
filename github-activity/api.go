@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func FetchUserEvents(username string) ([]map[string]interface{}, error) {
+func FetchUserEvents(username string) ([]GitHubEvent, error) {
 	url := fmt.Sprintf("https://api.github.com/users/%s/events", username)
 	fmt.Println("url: ", url)
 	client := &http.Client{Timeout: 10 * time.Second}
@@ -24,7 +24,7 @@ func FetchUserEvents(username string) ([]map[string]interface{}, error) {
 		return nil, fmt.Errorf("GitHub API error: %s\n%s", resp.Status, string(body))
 	}
 
-	var events []map[string]interface{}
+	var events []GitHubEvent
 
 	decoder := json.NewDecoder(resp.Body)
 	if err := decoder.Decode(&events); err != nil {

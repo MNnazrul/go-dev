@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	
 	opts, args := ParseFlags()
 
 	if len(args) < 1 {
@@ -16,7 +15,7 @@ func main() {
 	username := args[0]
 	fmt.Printf("Fetching GitHub activity for user: %s\n", username)
 	fmt.Printf("options : %+v\n", opts)
-	
+
 	events, err := FetchUserEvents(username)
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
@@ -29,6 +28,9 @@ func main() {
 		for _, event := range events {
 			fmt.Printf("%+v\n\n", event)
 		}
+	} else {
+		for _, event := range events {
+			fmt.Println(FormatEvent(event))
+		}
 	}
-
 }
