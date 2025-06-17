@@ -29,8 +29,25 @@ func main() {
 			fmt.Printf("%+v\n\n", event)
 		}
 	} else {
+
+		filterSet := map[string]bool{}
+		if opts.Filter != "" {
+			for _, t := range splitAndTrim(opts.Filter) {
+				filterSet[t] = true
+			}
+		}
+
+		count := opts.Limit
 		for _, event := range events {
+			if count == 0 {
+				break
+			}
+			if len(filterSet) > 0 && !filterSet[event.Type] {
+				continue
+			}
+			count--
 			fmt.Println(FormatEvent(event))
 		}
+
 	}
 }
