@@ -61,12 +61,16 @@ func StartProxy(port int, origin string, memCache *cache.MemoryCache) error {
 		})
 
 		for k, v := range resp.Header {
+			if k == "Content-Length" {
+				continue // Skip Content-Length, let Go set it
+			}
 			for _, vv := range v {
 				w.Header().Add(k, vv)
 			}
 		}
+		w.Header().Set("X-Cache", "MISS")
 		w.WriteHeader(resp.StatusCode)
-		io.Copy(w, resp.Body)
+		w.Write(body) // Make sure 'body' contains the full response from the origin
 	}
 
 	http.HandleFunc("/", handler)
